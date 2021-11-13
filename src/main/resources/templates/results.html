@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>The quadratic equation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form th:action="@{/results}" th:object="${resultDTO}" method="POST">
+    Введите коэффициенты:
+    <br>
+    a:
+    <input type="text" th:field="*{paramA}"/>
+    <br/>
+    b:
+    <input type="text" th:field="*{paramB}"/>
+    <br/>
+    c:
+    <input type="text" th:field="*{paramC}"/>
+    <br/>
+    <input type="submit" value="Вычислить"/>
+</form>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>Результат</th>
+        </tr>
+        <tr th:each="result : ${results}">
+            <td th:utext="${result.paramA}">...</td>
+            <td th:utext="${result.paramB}">...</td>
+            <td th:utext="${result.paramC}">...</td>
+            <td th:utext="${result.result}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
