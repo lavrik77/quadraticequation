@@ -1,8 +1,8 @@
-package ru.lavrinenko.quadraticequation.service;
+package ru.lavrinenko.quadraticequation.mapper;
 
 import org.mapstruct.Mapper;
 import ru.lavrinenko.quadraticequation.model.Result;
-import ru.lavrinenko.quadraticequation.modelDTO.ResultDTO;
+import ru.lavrinenko.quadraticequation.mapper.modelDTO.ResultDTO;
 
 import java.util.List;
 

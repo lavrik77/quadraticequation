@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.lavrinenko.quadraticequation.modelDTO.ResultDTO;
+import ru.lavrinenko.quadraticequation.mapper.modelDTO.ResultDTO;
 import ru.lavrinenko.quadraticequation.service.ResultService;
 
 @Controller
@@ -22,7 +22,11 @@ public class ResultController {
 
   @PostMapping("/results")
   public String results(ResultDTO resultDTO, Model model) {
-    model.addAttribute("results", resultService.getResults(resultDTO));
+    try {
+      model.addAttribute("results", resultService.getResults(resultDTO));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     return "results";
   }
 }

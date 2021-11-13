@@ -1,4 +1,4 @@
-package ru.lavrinenko.quadraticequation.modelDTO;
+package ru.lavrinenko.quadraticequation.mapper.modelDTO;
 
 public class ResultDTO {
 
