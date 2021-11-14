@@ -22,11 +22,7 @@ public class ResultController {
 
   @PostMapping("/results")
   public String results(ResultDTO resultDTO, Model model) {
-    try {
       model.addAttribute("results", resultService.getResults(resultDTO));
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
     return "results";
   }
 }

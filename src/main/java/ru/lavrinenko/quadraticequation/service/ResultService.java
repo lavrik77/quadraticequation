@@ -12,9 +12,11 @@ import java.util.List;
 @Service
 public class ResultService {
 
-  private final ResultsRepository resultsRepository;
+  private ResultsRepository resultsRepository;
 
-  private final ResultMapper resultMapper;
+  private ResultMapper resultMapper;
+
+  public ResultService(){}
 
   @Autowired
   public ResultService(ResultsRepository resultsRepository, ResultMapper resultMapper) {
@@ -26,30 +28,35 @@ public class ResultService {
     return resultsRepository.findAll();
   }
 
-  public List<ResultDTO> getResults(ResultDTO resultDTO) throws Exception {
-    if (resultDTO.getParamA() == 0) throw new Exception("Коэффициент а = 0. Решение уравнения невозможно!!!");
+  public List<ResultDTO> getResults(ResultDTO resultDTO) {;
     saveResult(resultDTO);
     return resultMapper.getResultListDTO(resultsRepository.findAll());
   }
 
   private void saveResult(ResultDTO resultDTO){
-    resultDTO.setResult(Calc(resultDTO));
-    resultsRepository.save(resultMapper.getResult(resultDTO));
+    try {
+      resultsRepository.save(resultMapper.getResult(calc(resultDTO)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
-  private String Calc(ResultDTO resultDTO) {
+  public ResultDTO calc(ResultDTO resultDTO) throws Exception {
     double a = resultDTO.getParamA();
+    if (a == 0) throw new Exception("Коэффициент а = 0. Решение уравнения невозможно!!!");
     double b = resultDTO.getParamB();
     double c = resultDTO.getParamC();
 
     double d = b * b - 4 * a * c;
     if (d < 0) {
-      return "Нет решений!";
+      resultDTO.setResult("Нет решений!");
     } else if (d == 0) {
-      return "x= " + ((-b) / (2 * a));
+      resultDTO.setResult("x= " + ((-b) / (2 * a)));
     } else {
-      return "x1= " + ((-b + Math.sqrt(d)) / (2 * a)) + ", x2= " + ((-b - Math.sqrt(d)) / (2 * a));
+      resultDTO.setResult("x1= " + ((-b + Math.sqrt(d)) / (2 * a)) +
+                          ", x2= " + ((-b - Math.sqrt(d)) / (2 * a)));
     }
+    return resultDTO;
   }
 
 }
