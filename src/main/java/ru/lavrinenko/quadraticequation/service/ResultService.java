@@ -1,5 +1,7 @@
 package ru.lavrinenko.quadraticequation.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.lavrinenko.quadraticequation.dao.ResultsRepository;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Service
 public class ResultService {
+
+  private final Logger log = LoggerFactory.getLogger(ResultService.class);
 
   private ResultsRepository resultsRepository;
 
@@ -43,7 +47,10 @@ public class ResultService {
 
   public ResultDTO calc(ResultDTO resultDTO) throws Exception {
     double a = resultDTO.getParamA();
-    if (a == 0) throw new Exception("Коэффициент а = 0. Решение уравнения невозможно!!!");
+    if (a == 0) {
+      log.error("Коэффициент а = 0. Решение уравнения невозможно!!!");
+      throw new Exception("Коэффициент а = 0. Решение уравнения невозможно!!!");
+    }
     double b = resultDTO.getParamB();
     double c = resultDTO.getParamC();
 
