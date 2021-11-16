@@ -5,16 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<h3>Решение квадратного уравнения</h3>
 <form th:action="@{/results}" th:object="${resultDTO}" method="POST">
     Введите коэффициенты:
     <br>
-    a:
+    A:
     <input type="text" th:field="*{paramA}"/>
     <br/>
-    b:
+    B:
     <input type="text" th:field="*{paramB}"/>
     <br/>
-    c:
+    C:
     <input type="text" th:field="*{paramC}"/>
     <br/><br/>
     <input type="submit" value="Вычислить"/>
