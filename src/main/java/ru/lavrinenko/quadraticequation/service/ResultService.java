@@ -5,9 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.lavrinenko.quadraticequation.dao.ResultsRepository;
-import ru.lavrinenko.quadraticequation.model.Result;
-import ru.lavrinenko.quadraticequation.mapper.modelDTO.ResultDTO;
 import ru.lavrinenko.quadraticequation.mapper.ResultMapper;
+import ru.lavrinenko.quadraticequation.mapper.modelDTO.ResultDTO;
 
 import java.util.List;
 
@@ -28,8 +27,8 @@ public class ResultService {
     this.resultMapper = resultMapper;
   }
 
-  public List<Result> getResults() {
-    return resultsRepository.findAll();
+  public List<ResultDTO> getResults() {
+    return resultMapper.getResultListDTO(resultsRepository.findAll());
   }
 
   public List<ResultDTO> getResults(ResultDTO resultDTO) {;
